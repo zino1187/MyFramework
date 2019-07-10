@@ -1,0 +1,11 @@
+{
+	"controller":{
+		"/movie.do" : "com.myframework.movie.controller.MovieController",
+		"/blood.do" : "com.myframework.blood.controller.BloodController",
+		"/board/write.do" : "com.myframework.board.controller.WriteController"
+	},
+	"view":{
+		"/view/movie": "/movie/movie_view.jsp",
+		"/view/blood": "/movie/movie_view.jsp"
+	}
+}
