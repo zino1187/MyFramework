@@ -26,7 +26,8 @@ function myMap() {
 	//생성된 맵에 각종 속성~~~~
 	<%for(int i=0;i<mapsList.size();i++){%>
 	<%Maps maps = mapsList.get(i);%>
-		var marker = new MyMarker(<%=maps.getLati()%>, <%=maps.getLongi()%>,"/images/<%=maps.getUrl()%>",map, "<%=maps.getMsg()%>");
+		var marker = new MyMarker(<%=maps.getLati()%>,<%=maps.getLongi()%>,"/images/<%=maps.getUrl()%>", map , "<%=maps.getMsg()%>");
+		
 	<%}%>
 }
 </script>
