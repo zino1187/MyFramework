@@ -90,8 +90,14 @@ public class DispatcherServlet extends HttpServlet{
 			String viewPage = (String)obj2.get(viewKey);
 			System.out.println("뷰페이지 : "+viewPage);
 			
-			dis = request.getRequestDispatcher(viewPage);
-			dis.forward(request, response);//결과 페이지로 포워딩~~~
+			//요청에 대한 응답은 포워딩 or 요청을 끊어야 할것이냐 선택해야함
+			if(controller.isForward()) {
+				dis = request.getRequestDispatcher(viewPage);
+				dis.forward(request, response);//결과 페이지로 포워딩~~~
+			}else {
+				//응답을 받는 브라우저는 ,지정한 URL로 다시 접속해라!!
+				response.sendRedirect(viewPage);
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}catch (ClassNotFoundException e) {

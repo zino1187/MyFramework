@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#regist_area{
+	background:yellow;
+	width:200px;
+	height:700px;
+	float:left;
+}
+#map_area{
+	background:pink;height:200px;
+	width:1200px;
+	height:700px;
+	float:left;
+}
+input, select, textarea, button{
+	width:90%;
+	height:45px;
+	font-size:20px;
+	margin-bottom:5px;
+}
+#msg{
+	height:250px;
+	background:#ffdd00;
+}
+</style>
+<script>
+function regist(){
+	//오라클에 맵 정보 등록 요청!!!
+	//요청시 아이프레임을 타겟으로 요청을 시도!!
+	form1.target="map_area";
+	form1.action="/map/regist.do";
+	form1.method="post";
+	form1.submit();
+}
+</script>
+</head>
+<body>
+	<div id="regist_area">
+		<form name="form1">
+			<input type="text" placeholder="위도입력" name="lati"/>
+			<input type="text" placeholder="경도입력" name="longi"/>
+			<select name="url">
+				<option value="e1.png">아이콘1</option>
+				<option value="e2.png">아이콘2</option>
+				<option value="e3.png">아이콘3</option>
+				<option value="e4.png">아이콘4</option>
+			</select>
+			<textarea id="msg" name="msg"></textarea>
+		</form>
+		<button onClick="regist()">등록</button>
+	</div>
+	<iframe id="map_area" name="map_area" src="/map/list.do" frameborder="0px"></iframe>
+</body>
+</html>
+
+
+
+
+
+
+

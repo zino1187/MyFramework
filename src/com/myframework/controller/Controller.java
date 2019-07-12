@@ -14,6 +14,7 @@ public interface Controller {  //자료형+구현강제
 	//구현강제!!!!
 	public void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 	public String getResultKey();//직접적인 자원명을 명시하지 않는다!!
+	public boolean isForward();//포워딩 여부를 결정짓는 메서드!!
 }
 
 

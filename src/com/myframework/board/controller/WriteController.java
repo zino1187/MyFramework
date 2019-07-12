@@ -31,7 +31,16 @@ public class WriteController implements Controller{
 	}
 
 	public String getResultKey() {
-		return null;
+		return "/view/board/write";
 	}
 	
+	public boolean isForward() {
+		return false;
+	}
 }
+
+
+
+
+
+

@@ -2,10 +2,29 @@
 	"controller":{
 		"/movie.do" : "com.myframework.movie.controller.MovieController",
 		"/blood.do" : "com.myframework.blood.controller.BloodController",
-		"/board/write.do" : "com.myframework.board.controller.WriteController"
+		"/board/write.do" : "com.myframework.board.controller.WriteController",
+		"/board/list.do" : "com.myframework.board.controller.ListController",
+		"/board/detail.do" : "com.myframework.board.controller.DetailController",
+		"/board/delete.do" : "com.myframework.board.controller.DeleteController",
+		"/board/edit.do" : "com.myframework.board.controller.EditController",
+		"/map/regist.do" : "com.myframework.map.controller.RegistController",
+		"/map/list.do" : "com.myframework.map.controller.ListController"
 	},
 	"view":{
 		"/view/movie": "/movie/movie_view.jsp",
-		"/view/blood": "/movie/movie_view.jsp"
+		"/view/blood": "/movie/movie_view.jsp",
+		"/view/board/write": "/board/list.do",
+		"/view/board/list":"/board/list.jsp",
+		"/view/board/detail":"/board/detail.jsp",
+		"/view/board/delete":"/board/list.do",		
+		"/view/board/edit":"/board/detail.jsp",
+		"/view/map/regist":"/map/list.do",
+		"/view/map/list":"/map2/map.jsp"				
 	}
 }
+
+
+
+
+
+

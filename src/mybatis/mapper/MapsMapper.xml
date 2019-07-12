@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Maps">
+	<insert id="insert" parameterType="Maps">
+		insert into maps(maps_id, lati, longi, url, msg)
+		values(seq_maps.nextval, #{lati}, #{longi}, #{url},#{msg})
+	</insert>
+	
+	<select id="selectAll" resultType="Maps">
+		select * from maps
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,23 @@
+<%@page import="com.myframework.board.model.domain.Board2"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	//서브컨트롤러가 저장한 데이터 꺼내보기!!!
+	List<Board2> boardList=(List)request.getAttribute("boardList");
+	out.print("게시물 총 수는 "+boardList.size());
+	int currentPage=1;
+	if(request.getParameter("currentPage")!=null){
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	int totalRecord=boardList.size();//총 레코드 수
+	int pageSize=10; //페이지당 보여질 레코드 수
+	int totalPage=(int)Math.ceil((float)totalRecord/pageSize);//총 페이지 수
+	int blockSize=10;//블럭당 보여질 페이지 수			
+	int firstPage=currentPage - (currentPage-1)%blockSize;//블럭당 시작  페이지
+	int lastPage=firstPage + (blockSize-1);//블럭당 마지막 페이지
+	int curPos = (currentPage-1)*pageSize;
+	int num = totalRecord - curPos;
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -46,70 +65,31 @@ img{border:0px}
 	<tr>	
 		<td colspan="5" id="list">
 		  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+		    <%for(int i=0;i<pageSize;i++){%>
+		    <%if(num<1)break; %>
+		    <%Board2 board2=boardList.get(curPos++); %>
 		    <tr align="center" height="20px" onMouseOver="this.style.background='#FFFF99'" onMouseOut="this.style.background=''">
-			  <td width="50">1</td>
-			  <td width="303"><a href="detail.jsp">제목입니다.</a></td>
-			  <td width="100">관리자</td>
-			  <td width="100">2008/02/10</td>
-			  <td width="50">5</td>
+			  <td width="50"><%=num-- %></td>
+			  <td width="303"><a href="/board/detail.do?board2_id=<%=board2.getBoard2_id()%>"><%=board2.getTitle() %>.</a></td>
+			  <td width="100"><%=board2.getWriter() %></td>
+			  <td width="100"><%=board2.getRegdate().substring(0,10) %></td>
+			  <td width="50"><%=board2.getHit() %></td>
 		    </tr>
 			<tr>
 				<td height="1" colspan="5" background="/board/images/line_dot.gif"></td>
 			</tr>
-		    <tr align="center" height="20px" onMouseOver="this.style.background='#FFFF99'" onMouseOut="this.style.background=''">
-			  <td width="50">1</td>
-			  <td width="303">제목입니다.</td>
-			  <td width="100">관리자</td>
-			  <td width="100">2008/02/10</td>
-			  <td width="50">5</td>
-		    </tr>
-			<tr>
-				<td height="1" colspan="5" background="/board/images/line_dot.gif"></td>
-			</tr>
-		    <tr align="center" height="20px" onMouseOver="this.style.background='#FFFF99'" onMouseOut="this.style.background=''">
-			  <td width="50">1</td>
-			  <td width="303">제목입니다.</td>
-			  <td width="100">관리자</td>
-			  <td width="100">2008/02/10</td>
-			  <td width="50">5</td>
-		    </tr>
-			<tr>
-				<td height="1" colspan="5" background="/board/images/line_dot.gif"></td>
-			</tr>
-		    <tr align="center" height="20px" onMouseOver="this.style.background='#FFFF99'" onMouseOut="this.style.background=''">
-			  <td width="50">1</td>
-			  <td width="303">제목입니다.</td>
-			  <td width="100">관리자</td>
-			  <td width="100">2008/02/10</td>
-			  <td width="50">5</td>
-		    </tr>
-			<tr>
-				<td height="1" colspan="5" background="/board/images/line_dot.gif"></td>
-			</tr>
-		    <tr align="center" height="20px" onMouseOver="this.style.background='#FFFF99'" onMouseOut="this.style.background=''">
-			  <td width="50">1</td>
-			  <td width="303">제목입니다.</td>
-			  <td width="100">관리자</td>
-			  <td width="100">2008/02/10</td>
-			  <td width="50">5</td>
-		    </tr>
-			<tr>
-				<td height="1" colspan="5" background="/board/images/line_dot.gif"></td>
-			</tr>
-		    <tr align="center" height="20px" onMouseOver="this.style.background='#FFFF99'" onMouseOut="this.style.background=''">
-			  <td width="50">1</td>
-			  <td width="303">제목입니다.</td>
-			  <td width="100">관리자</td>
-			  <td width="100">2008/02/10</td>
-			  <td width="50">5</td>
-		    </tr>
-			<tr>
-				<td height="1" colspan="5" background="/board/images/line_dot.gif"></td>
-			</tr>
+			<%}%>
 		  </table>		</td>
 	</tr>
   <tr>
-    <td id="paging" height="20" colspan="5" align="center">[1][2][3][4][5][6][7][8][9][10]</td>
+    <td id="paging" height="20" colspan="5" align="center">
+    ◀
+    <%for(int i=firstPage;i<=lastPage;i++){ %>
+    <%if(i>totalPage)break; %>
+    <a href="/board/list.do?currentPage=<%=i %>">[<%=i %>]</a>
+    <%} %>
+   ▶ 
+    </td>
   </tr>
   <tr>
     <td height="20" colspan="5" align="right" style="padding-right:2px;">
